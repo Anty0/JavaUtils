@@ -5,7 +5,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.ref.WeakReference;
 import java.net.UnknownHostException;
+
+import eu.codetopic.java.utils.exception.SourceUnavailableException;
 
 public final class JavaUtils {
 
@@ -69,5 +72,17 @@ public final class JavaUtils {
         tr.printStackTrace(pw);
         pw.flush();
         return sw.toString();
+    }
+
+    //////////////////////////////////////
+    //////REGION - WEAK_REFERENCE/////////
+    //////////////////////////////////////
+
+    @NotNull
+    public static <T> T extractReference(WeakReference<T> reference) {
+        T referent = reference.get();
+        if (referent == null)
+            throw new SourceUnavailableException("Referent was garbage collected");
+        return referent;
     }
 }

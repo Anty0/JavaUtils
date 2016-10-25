@@ -16,16 +16,16 @@ public class IteratorWrapper<E> implements Iterator<E> {
 
     @Override
     public boolean hasNext() {
-        return mBase.hasNext();
+        return getBase().hasNext();
     }
 
     @Override
     public E next() {
-        return mBase.next();
+        return getBase().next();
     }
 
     @Override
     public void remove() {
-        mBase.next();
+        getBase().next();
     }
 }
