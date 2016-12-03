@@ -1,10 +1,9 @@
 package eu.codetopic.java.utils.log;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.codetopic.java.utils.ArrayTools;
 import eu.codetopic.java.utils.log.base.LogLine;
 import eu.codetopic.java.utils.log.base.Priority;
 
@@ -28,7 +27,7 @@ public final class LogsHandler {
     synchronized void onLogged(final LogLine logLine) {
         Priority priority = logLine.getPriority();
         for (OnLoggedListener listener : listeners)
-            if (ArrayUtils.contains(listener.filterPriorities(), priority))
+            if (ArrayTools.contains(listener.filterPriorities(), priority))
                 listener.onLogged(logLine);
     }
 
