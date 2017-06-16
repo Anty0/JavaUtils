@@ -26,9 +26,12 @@ public final class LogsHandler {
 
     synchronized void onLogged(final LogLine logLine) {
         Priority priority = logLine.getPriority();
-        for (OnLoggedListener listener : listeners)
-            if (ArrayTools.contains(listener.filterPriorities(), priority))
+        for (OnLoggedListener listener : listeners) {
+            Priority[] allowedPriorities = listener.filterPriorities();
+            if (allowedPriorities == null || ArrayTools.contains(allowedPriorities, priority)) {
                 listener.onLogged(logLine);
+            }
+        }
     }
 
     public interface OnLoggedListener {
