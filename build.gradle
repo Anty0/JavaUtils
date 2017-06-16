@@ -1,7 +1,7 @@
 apply plugin: 'java'
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 repositories {
     mavenCentral()
@@ -11,10 +11,11 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    compile 'org.jsoup:jsoup:1.9.2'
-    compile 'com.google.guava:guava:19.0'
-    compile 'com.google.code.gson:gson:2.7'
-    //compile 'net.sf.corn:corn-cps:1.1.7'
+    compile 'org.jsoup:jsoup:1.10.3'
+    compile 'com.google.guava:guava:22.0-android'
+    compile 'com.google.code.findbugs:jsr305:3.0.2' // fixes bug with dependencies (guava depends on old version of this library)
+    compile 'com.google.code.gson:gson:2.8.1'
+    //compile 'net.sf.corn:corn-cps:1.1.10'
 
     compile 'commons-io:commons-io:2.5'
 }
