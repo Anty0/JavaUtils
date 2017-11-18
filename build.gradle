@@ -27,17 +27,18 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    compile 'org.jsoup:jsoup:1.10.3'
-    compile 'com.google.guava:guava:23.0-android'
-    compile 'com.google.code.findbugs:jsr305:3.0.2' // fixes bug with dependencies (guava depends on old version of this library)
-    compile 'com.google.code.gson:gson:2.8.2'
-    //compile 'net.sf.corn:corn-cps:1.1.10'
+    implementation 'org.jsoup:jsoup:1.10.3'
+    implementation 'com.google.guava:guava:23.0-android'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2' // fixes bug with dependencies (guava depends on old version of this library)
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'org.jetbrains:annotations:13.0'
+    //implementation 'net.sf.corn:corn-cps:1.1.10'
 
-    compile 'commons-io:commons-io:2.5'
+    implementation 'commons-io:commons-io:2.5'
 }

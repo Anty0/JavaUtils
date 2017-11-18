@@ -26,6 +26,8 @@ import java.io.StringWriter;
 import java.lang.ref.WeakReference;
 import java.net.UnknownHostException;
 
+import javax.annotation.CheckReturnValue;
+
 import eu.codetopic.java.utils.exception.SourceUnavailableException;
 
 public final class JavaUtils {
@@ -39,6 +41,7 @@ public final class JavaUtils {
     //////REGION - TEXTS_AND_STRINGS//////
     //////////////////////////////////////
 
+    @CheckReturnValue
     public static String substring(@NotNull String base, @Nullable String start,
                                    @Nullable String end) {
 
@@ -49,11 +52,13 @@ public final class JavaUtils {
                 endIndex != -1 ? endIndex : base.length());
     }
 
+    @CheckReturnValue
     public static String fillToMaxLen(int toFill) {
         return fillToLen(Integer.toString(toFill),
                 Integer.toString(Integer.MAX_VALUE).length());
     }
 
+    @CheckReturnValue
     public static String fillToLen(CharSequence toFill, int len) {
         StringBuilder builder = new StringBuilder();
         for (int i = toFill.length(); i < len; i++)
@@ -62,10 +67,12 @@ public final class JavaUtils {
         return builder.toString();
     }
 
+    @CheckReturnValue
     public static String addBeforeEveryLine(String toEdit, String toAdd) {
         return toAdd + toEdit.replace("\n", "\n" + toAdd);
     }
 
+    @CheckReturnValue
     public static double parseDouble(String string) {
         try {
             return Double.parseDouble(string.replace(",", ".").replaceAll("[^\\d.]", ""));
@@ -74,6 +81,7 @@ public final class JavaUtils {
         }
     }
 
+    @CheckReturnValue
     public static String getStackTraceString(Throwable tr) {
         if (tr == null) return "";
 
@@ -97,6 +105,7 @@ public final class JavaUtils {
     //////////////////////////////////////
 
     @NotNull
+    @CheckReturnValue
     public static <T> T extractReference(WeakReference<T> reference) {
         T referent = reference.get();
         if (referent == null)
