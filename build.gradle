@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 sourceCompatibility = "1.8"
@@ -33,12 +33,12 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    implementation 'org.jsoup:jsoup:1.10.3'
+    //implementation 'org.jsoup:jsoup:1.10.3'
     implementation 'com.google.guava:guava:23.0-android'
     implementation 'com.google.code.findbugs:jsr305:3.0.2' // fixes bug with dependencies (guava depends on old version of this library)
-    implementation 'com.google.code.gson:gson:2.8.2'
+    //implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'org.jetbrains:annotations:13.0'
     //implementation 'net.sf.corn:corn-cps:1.1.10'
 
-    implementation 'commons-io:commons-io:2.5'
+    //implementation 'commons-io:commons-io:2.5'
 }
