@@ -23,21 +23,23 @@ import java.io.*
 /**
  * @author anty
  */
+object JavaExtensions {
 
-fun Serializable.serialize(): String {
-    return ByteArrayOutputStream().apply {
-        ObjectOutputStream(this@apply)
-                .use { it.writeObject(this@serialize) }
-    }.toString()
-}
+    fun Serializable.serialize(): String {
+        return ByteArrayOutputStream().apply {
+            ObjectOutputStream(this@apply)
+                    .use { it.writeObject(this@serialize) }
+        }.toString()
+    }
 
-fun <T : Serializable> String.deserialize(): T? {
-    return ObjectInputStream(ByteArrayInputStream(toByteArray())).use {
-        try {
-            @Suppress("UNCHECKED_CAST")
-            it.readObject() as T
-        } catch (e: Exception) {
-            null
+    fun <T : Serializable> String.deserialize(): T? {
+        return ObjectInputStream(ByteArrayInputStream(toByteArray())).use {
+            try {
+                @Suppress("UNCHECKED_CAST")
+                it.readObject() as T
+            } catch (e: Exception) {
+                null
+            }
         }
     }
 }
