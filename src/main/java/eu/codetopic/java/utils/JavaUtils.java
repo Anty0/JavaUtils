@@ -62,6 +62,13 @@ public final class JavaUtils {
         return builder.toString();
     }
 
+    public static String addToLen(CharSequence toFill, int len) {
+        StringBuilder builder = new StringBuilder(toFill);
+        for (int i = toFill.length(); i < len; i++)
+            builder.append(" ");
+        return builder.toString();
+    }
+
     public static String addBeforeEveryLine(String toEdit, String toAdd) {
         return toAdd + toEdit.replace("\n", "\n" + toAdd);
     }
