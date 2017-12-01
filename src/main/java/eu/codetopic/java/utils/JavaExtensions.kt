@@ -42,4 +42,13 @@ object JavaExtensions {
             }
         }
     }
+
+    fun <T> max(first: T, second: T, selector: (T) -> Int): T {
+        return if (selector(first) >= selector(second)) first else second
+    }
+
+    inline fun <T1, T2, R> Array<out T1>.join(other: Array<out T2>, transform: (T1, T2) -> R): List<R> {
+        val smaller = max(this, other) { -it.size }
+        return smaller.indices.mapTo(ArrayList(smaller.size)) { transform(this[it], other[it]) }
+    }
 }
