@@ -51,4 +51,6 @@ object JavaExtensions {
         val smaller = max(this, other) { -it.size }
         return smaller.indices.mapTo(ArrayList(smaller.size)) { transform(this[it], other[it]) }
     }
+
+    fun Double.format(digits: Int): String = java.lang.String.format("%.${digits}f", this)
 }
