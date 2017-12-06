@@ -20,6 +20,11 @@ package eu.codetopic.java.utils.simple;
 
 import java.util.ListIterator;
 
+/**
+ * Use kotlin's interface delegate instead
+ * @param <E>
+ */
+@Deprecated
 public class ListIteratorWrapper<E> implements ListIterator<E> {
 
     private final ListIterator<E> mBase;

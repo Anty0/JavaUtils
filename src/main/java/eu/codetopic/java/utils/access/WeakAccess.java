@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
-import eu.codetopic.java.utils.JavaUtils;
+import eu.codetopic.java.utils.JavaExtensions;
 
 public class WeakAccess<A> extends Access<WeakReference<A>> {
 
@@ -34,6 +34,6 @@ public class WeakAccess<A> extends Access<WeakReference<A>> {
 
     @NotNull
     protected synchronized A getExtractedAccessed() {
-        return JavaUtils.extractReference(getAccessed());
+        return JavaExtensions.getOrThrow(getAccessed());
     }
 }

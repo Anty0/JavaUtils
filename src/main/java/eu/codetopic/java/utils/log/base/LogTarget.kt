@@ -16,13 +16,9 @@
  * along  with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.codetopic.java.utils.log.base;
+package eu.codetopic.java.utils.log.base
 
-public class DefaultTarget implements LogTarget {
+interface LogTarget {
 
-    @Override
-    public void println(LogLine logLine) {
-        if (Priority.ERROR.equals(logLine.getPriority())) System.err.println(logLine);
-        else System.out.println(logLine);
-    }
+    fun println(logLine: LogLine)
 }

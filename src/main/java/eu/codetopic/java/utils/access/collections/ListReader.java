@@ -38,7 +38,7 @@ public class ListReader<E, T extends ListAccess<E>> extends Acceding<List<E>, T>
 
     protected ListReader(Accessible<List<E>, T> accessible) {
         super(accessible);
-        content = getAccess().getContentAsImmutable();
+        content = getAccess().getImmutableContents();
     }
 
     public int size() {

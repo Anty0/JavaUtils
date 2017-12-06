@@ -20,6 +20,11 @@ package eu.codetopic.java.utils.simple;
 
 import java.util.Iterator;
 
+/**
+ * Use kotlin's interface delegate instead
+ * @param <E>
+ */
+@Deprecated
 public class IteratorWrapper<E> implements Iterator<E> {
 
     private final Iterator<E> mBase;

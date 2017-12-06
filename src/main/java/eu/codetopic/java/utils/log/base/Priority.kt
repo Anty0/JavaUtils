@@ -16,9 +16,10 @@
  * along  with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.codetopic.java.utils.log.base;
+package eu.codetopic.java.utils.log.base
 
-public interface LogTarget {
+enum class Priority(val displayID: Char) {
 
-    void println(LogLine logLine);
+    VERBOSE('V'), DEBUG('D'), INFO('I'),
+    WARN('W'), ERROR('E'), ASSERT('A')
 }

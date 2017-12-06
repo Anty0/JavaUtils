@@ -18,9 +18,8 @@
 
 package eu.codetopic.java.utils.access.collections;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import eu.codetopic.java.utils.access.Access;
@@ -34,8 +33,8 @@ public abstract class ListAccess<E> extends Access<List<E>> {
         super(creator, accessed);
     }
 
-    public ImmutableList<E> getContentAsImmutable() {
-        return ImmutableList.copyOf(getAccessed());
+    public List<E> getImmutableContents() {
+        return Collections.unmodifiableList(getAccessed());
     }
 
     public abstract void applyModifications(Object editTag, Collection<ListModification<E>> modifications);

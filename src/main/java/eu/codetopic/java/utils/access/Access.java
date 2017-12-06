@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
-import eu.codetopic.java.utils.JavaUtils;
+import eu.codetopic.java.utils.JavaExtensions;
 import eu.codetopic.java.utils.log.Log;
 
 public class Access<A> {
@@ -34,14 +34,14 @@ public class Access<A> {
     private boolean closed = false;
 
     public Access(Accessible<?, ?> creator, A accessed) {
-        this.creator = new WeakReference<Accessible<?, ?>>(creator);
+        this.creator = new WeakReference<>(creator);
         this.accessed = accessed;
         creator.onAccessCreated(this);
     }
 
     @NotNull
     protected Accessible<?, ?> getCreator() {
-        return JavaUtils.extractReference(creator);
+        return JavaExtensions.getOrThrow(creator);
     }
 
     protected synchronized A getAccessed() {

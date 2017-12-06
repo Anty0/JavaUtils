@@ -16,159 +16,162 @@
  * along  with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.codetopic.java.utils.log;
+package eu.codetopic.java.utils.log
 
-import eu.codetopic.java.utils.log.base.LogLine;
-import eu.codetopic.java.utils.log.base.Priority;
+import eu.codetopic.java.utils.log.base.LogLine
+import eu.codetopic.java.utils.log.base.Priority
 
-public final class Log {
+object Log {
 
-    private static boolean DEBUG_MODE = false;
-
-    private Log() {
-    }
-
-    public static void setDebugMode(boolean debugMode) {
-        DEBUG_MODE = debugMode;
-    }
-
-    public static boolean isInDebugMode() {
-        return DEBUG_MODE;
-    }
+    @get:[Synchronized]
+    @set:[Synchronized]
+    var debugMode = false
 
     /**
      * Low-level logging call.
      *
      * @param logLine LogLine to log into log
      */
-    public static void println(LogLine logLine) {
-        Logger.println(logLine);
+    @JvmStatic
+    fun println(logLine: LogLine) {
+        Logger.println(logLine)
     }
 
     /**
      * Send a VERBOSE log message.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      */
-    public static void v(String tag, String msg) {
-        println(new LogLine(Priority.VERBOSE, tag, msg));
+    @JvmStatic
+    fun v(tag: String, msg: String) {
+        println(LogLine(Priority.VERBOSE, tag, msg))
     }
 
     /**
      * Send a VERBOSE log message and log the exception.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
-    public static void v(String tag, String msg, Throwable tr) {
-        println(new LogLine(Priority.VERBOSE, tag, msg, tr));
+    @JvmStatic
+    fun v(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.VERBOSE, tag, msg, tr))
     }
 
     /**
      * Send a DEBUG log message.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      */
-    public static void d(String tag, String msg) {
-        println(new LogLine(Priority.DEBUG, tag, msg));
+    @JvmStatic
+    fun d(tag: String, msg: String) {
+        println(LogLine(Priority.DEBUG, tag, msg))
     }
 
     /**
      * Send a DEBUG log message and log the exception.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
-    public static void d(String tag, String msg, Throwable tr) {
-        println(new LogLine(Priority.DEBUG, tag, msg, tr));
+    @JvmStatic
+    fun d(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.DEBUG, tag, msg, tr))
     }
 
     /**
      * Send an INFO log message.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      */
-    public static void i(String tag, String msg) {
-        println(new LogLine(Priority.INFO, tag, msg));
+    @JvmStatic
+    fun i(tag: String, msg: String) {
+        println(LogLine(Priority.INFO, tag, msg))
     }
 
     /**
      * Send a INFO log message and log the exception.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
-    public static void i(String tag, String msg, Throwable tr) {
-        println(new LogLine(Priority.INFO, tag, msg, tr));
+    @JvmStatic
+    fun i(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.INFO, tag, msg, tr))
     }
 
     /**
      * Send a WARN log message.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      */
-    public static void w(String tag, String msg) {
-        println(new LogLine(Priority.WARN, tag, msg));
+    @JvmStatic
+    fun w(tag: String, msg: String) {
+        println(LogLine(Priority.WARN, tag, msg))
     }
 
     /**
      * Send a WARN log message and log the exception.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
-    public static void w(String tag, String msg, Throwable tr) {
-        println(new LogLine(Priority.WARN, tag, msg, tr));
+    @JvmStatic
+    fun w(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.WARN, tag, msg, tr))
     }
 
     /**
      * Send a WARN log message and log the exception.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param tr  An exception to log
      */
-    public static void w(String tag, Throwable tr) {
-        println(new LogLine(Priority.WARN, tag, null, tr));
+    @JvmStatic
+    fun w(tag: String, tr: Throwable) {
+        println(LogLine(Priority.WARN, tag, null, tr))
     }
 
     /**
      * Send an ERROR log message.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      */
-    public static void e(String tag, String msg) {
-        println(new LogLine(Priority.ERROR, tag, msg));
+    @JvmStatic
+    fun e(tag: String, msg: String) {
+        println(LogLine(Priority.ERROR, tag, msg))
     }
 
     /**
      * Send a ERROR log message and log the exception.
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
-     *            the class or activity where the log call occurs.
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
-    public static void e(String tag, String msg, Throwable tr) {
-        println(new LogLine(Priority.ERROR, tag, msg, tr));
+    @JvmStatic
+    fun e(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.ERROR, tag, msg, tr))
     }
 
 }

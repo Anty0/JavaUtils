@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import eu.codetopic.java.utils.JavaUtils;
+import eu.codetopic.java.utils.JavaExtensions;
 import eu.codetopic.java.utils.simple.IteratorWrapper;
 
 public class FoundField implements Iterable<FoundField> {
@@ -141,7 +141,7 @@ public class FoundField implements Iterable<FoundField> {
             for (FoundField contentField : content)
                 if (showHidden || !contentField.isHidden() || contentField.getContentFields().length > 0)
                     csb.append("\n").append(contentField.hierarchyToString(showHidden, fieldsObject));
-            sb.append(JavaUtils.addBeforeEveryLine(csb.toString(), "    "));
+            sb.append(JavaExtensions.addBeforeEveryLine(csb.toString(), "    "));
             sb.append("\n}");
         }
         return sb.toString();

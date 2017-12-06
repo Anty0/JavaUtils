@@ -16,22 +16,12 @@
  * along  with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package eu.codetopic.java.utils.exception;
+package eu.codetopic.java.utils.log.base
 
-public class InvalidClass extends RuntimeException {
+class DefaultTarget : LogTarget {
 
-    public InvalidClass() {
-    }
-
-    public InvalidClass(String detailMessage) {
-        super(detailMessage);
-    }
-
-    public InvalidClass(String detailMessage, Throwable throwable) {
-        super(detailMessage, throwable);
-    }
-
-    public InvalidClass(Throwable throwable) {
-        super(throwable);
+    override fun println(logLine: LogLine) {
+        if (Priority.ERROR == logLine.priority) System.err.println(logLine)
+        else System.out.println(logLine)
     }
 }

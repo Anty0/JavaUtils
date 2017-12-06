@@ -23,7 +23,10 @@ import java.util.Comparator;
 /**
  * Backport of java.util.Objects
  * Utility methods for objects.
+ *
+ * USE KOTLIN'S EXTENSIONS INSTEAD
  */
+@Deprecated
 public final class Objects {
     private Objects() {
     }
