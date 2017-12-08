@@ -91,7 +91,7 @@ object JavaExtensions {
     @JvmStatic
     operator fun Char.times(other: Int): String {
         return StringBuilder().apply {
-            kotlin.repeat(other) { append(this) }
+            repeat(other) { append(this@times) }
         }.toString()
     }
 
