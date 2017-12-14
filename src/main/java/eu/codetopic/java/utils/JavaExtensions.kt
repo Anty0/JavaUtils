@@ -20,6 +20,8 @@ package eu.codetopic.java.utils
 
 import eu.codetopic.java.utils.exception.SourceUnavailableException
 import eu.codetopic.java.utils.log.Log
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.serializer
 import java.io.*
 import java.lang.Thread.sleep
 import java.lang.ref.Reference
@@ -149,6 +151,12 @@ object JavaExtensions {
     }
 
     //////////////////////////////////////
+    //////REGION - KOTLIN_SERIALIZATION///
+    //////////////////////////////////////
+
+    inline fun <reified T : Any> kSerializer(): KSerializer<T> = T::class.serializer()
+
+    //////////////////////////////////////
     //////REGION - EXPRESSIONS////////////
     //////////////////////////////////////
 
@@ -185,5 +193,22 @@ object JavaExtensions {
     } catch (e: InterruptedException) {
         Log.d("Thread", "trySleep", e)
         Thread.currentThread().interrupt(); false
+    }
+
+    //////////////////////////////////////
+    //////REGION - COLLECTIONS////////////
+    //////////////////////////////////////
+
+    inline fun <T, C : MutableIterable<T>> C.onEachIterate(
+            action: (iterator: MutableIterator<T>, obj: T) -> Unit): C = apply {
+        forEachIterate(action)
+    }
+
+    inline fun <T> MutableIterable<T>.forEachIterate(
+            action: (iterator: MutableIterator<T>, obj: T) -> Unit) {
+        val iterator = iterator()
+        while (iterator.hasNext()) {
+            action(iterator, iterator.next())
+        }
     }
 }

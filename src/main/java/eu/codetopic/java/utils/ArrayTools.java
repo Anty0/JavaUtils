@@ -81,7 +81,7 @@ public final class ArrayTools {
     }
 
     /**
-     * Use kotlin extension function instead
+     * Rework to kotlin extension function (as Array.without(Int)) and use it instead
      */
     @Deprecated
     public static <T> T[] remove(T[] array, int index) {
