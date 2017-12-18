@@ -18,6 +18,7 @@
 
 package eu.codetopic.java.utils.log
 
+import eu.codetopic.java.utils.debug.DebugMode
 import java.util.ArrayList
 
 import eu.codetopic.java.utils.log.base.DefaultTarget
@@ -40,7 +41,7 @@ object Logger {
     internal fun println(logLine: LogLine) {
         logsHandler.onLogged(logLine)
 
-        if (!Log.debugMode) return
+        if (!DebugMode.isEnabled) return
 
         synchronized(logLinesCache) {
             logLinesCache.add(logLine)

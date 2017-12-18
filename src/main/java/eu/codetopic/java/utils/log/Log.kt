@@ -23,10 +23,6 @@ import eu.codetopic.java.utils.log.base.Priority
 
 object Log {
 
-    @get:[Synchronized]
-    @set:[Synchronized]
-    var debugMode = false
-
     /**
      * Low-level logging call.
      *
