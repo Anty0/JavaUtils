@@ -211,4 +211,23 @@ object JavaExtensions {
             action(iterator, iterator.next())
         }
     }
+
+    //////////////////////////////////////
+    //////REGION - MISCELLANEOUS//////////
+    //////////////////////////////////////
+
+    inline fun <T> T.runIf(condition: (T) -> Boolean, block: (T) -> Unit): T {
+        if (condition(this)) block(this)
+        return this
+    }
+
+    inline fun <T> T.runIfNull(block: (T) -> Unit): T {
+        if (this == null) block(this)
+        return this
+    }
+
+    inline fun <T : R, R> T.letIf(condition: (T) -> Boolean, block: (T) -> R): R =
+            if (condition(this)) block(this) else this
+
+    inline fun <T : R, R> T.letIfNull(block: () -> R): R = this ?: block()
 }
