@@ -38,15 +38,27 @@ object JavaExtensions {
     //////REGION - TEXTS_AND_STRINGS//////
     //////////////////////////////////////
 
-    @JvmStatic
     fun String.substring(start: String?, end: String?): String {
-        return substring(
-                start?.let { indexOf(it) }
-                        ?.takeIf { it != -1 }
-                        ?.let { it + start.length } ?: 0,
-                end?.let { indexOf(it) }
-                        ?.takeIf { it != -1 } ?: length
-        )
+        val startIndex = start?.let { indexOf(it) }
+                ?.runIf({ it == -1 }) {
+                    throw IllegalArgumentException("Failed to find start string: \"$start\"")
+                }
+                ?.let { it + start.length } ?: 0
+        val endIndex = end?.let { indexOf(it, startIndex) }
+                ?.runIf({ it == -1 }) {
+                    throw IllegalArgumentException("Failed to find end string: \"$end\"")
+                } ?: length
+        return substring(startIndex, endIndex)
+    }
+
+    fun String.substringOrNull(start: String?, end: String?): String? {
+        val startIndex = start?.let { indexOf(it) }
+                ?.runIf({ it == -1 }) { return null }
+                ?.let { it + start.length } ?: 0
+        val endIndex = end?.let { indexOf(it, startIndex) }
+                ?.runIf({ it == -1 }) { return null }
+                ?: length
+        return substring(startIndex, endIndex)
     }
 
     @JvmStatic
