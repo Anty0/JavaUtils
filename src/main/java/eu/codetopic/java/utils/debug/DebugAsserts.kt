@@ -33,7 +33,7 @@ object DebugAsserts {
      * @see AssertionException
      */
     @Suppress("NOTHING_TO_INLINE")
-    inline fun fail(message: String?) {
+    inline fun fail(message: String?): Nothing {
         throw AssertionException(message)
     }
 
@@ -41,7 +41,7 @@ object DebugAsserts {
      * Fails a test with no message.
      */
     @Suppress("NOTHING_TO_INLINE")
-    inline fun fail() = fail(null)
+    inline fun fail(): Nothing = fail(null)
 
     /**
      * Asserts that a block returns true. If it isn't it throws an
