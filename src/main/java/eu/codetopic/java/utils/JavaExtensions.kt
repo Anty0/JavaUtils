@@ -237,10 +237,55 @@ object JavaExtensions {
         return this
     }
 
+    inline fun Boolean?.runIfTrue(block: () -> Unit): Boolean? {
+        if (this == true) block()
+        return this
+    }
+
+    inline fun Boolean.runIfTrue(block: () -> Unit): Boolean {
+        if (this) block()
+        return this
+    }
+
+    inline fun Boolean?.runIfFalse(block: () -> Unit): Boolean? {
+        if (this == false) block()
+        return this
+    }
+
+    inline fun Boolean.runIfFalse(block: () -> Unit): Boolean {
+        if (!this) block()
+        return this
+    }
+
     inline fun <T : R, R> T.letIf(condition: (T) -> Boolean, block: (T) -> R): R =
             if (condition(this)) block(this) else this
 
     inline fun <T : R, R> T?.letIfNull(block: () -> R): R = this ?: block()
+
+    inline infix fun <T> T.IfNull(block: () -> Unit): T {
+        if (this == null) block()
+        return this
+    }
+
+    inline infix fun Boolean?.IfTrue(block: () -> Unit): Boolean? {
+        if (this == true) block()
+        return this
+    }
+
+    inline infix fun Boolean.IfTrue(block: () -> Unit): Boolean {
+        if (this) block()
+        return this
+    }
+
+    inline fun Boolean?.IfFalse(block: () -> Unit): Boolean? {
+        if (this == false) block()
+        return this
+    }
+
+    inline fun Boolean.IfFalse(block: () -> Unit): Boolean {
+        if (!this) block()
+        return this
+    }
 
     //////////////////////////////////////
     //////REGION - SequenceBuilder////////
