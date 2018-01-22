@@ -18,9 +18,10 @@
 
 package eu.codetopic.java.utils.log.base
 
-import java.io.Serializable
-
 import eu.codetopic.java.utils.JavaExtensions.printStackTraceToString
+import eu.codetopic.java.utils.JavaExtensions.yieldNotNull
+import java.io.Serializable
+import kotlin.coroutines.experimental.buildSequence
 
 class LogLine
 /**
@@ -30,19 +31,41 @@ class LogLine
  * @param message   The message you would like logged.
  * @param throwable Throwable to be added after your message
  */
-@JvmOverloads constructor(val priority: Priority, val tag: String,
-                          val message: String?, val throwable: Throwable? = null) : Serializable {
+constructor(val priority: Priority, val tag: String,
+            val message: String?, val throwable: Throwable? = null) : Serializable {
 
     companion object {
 
-        private val LOG_TAG = "LogLine"
+        private const val LOG_TAG = "LogLine"
     }
 
     val messageWithThrowable: String
-        get() = mutableListOf<String>().apply {
-            message?.let { add(it) }
-            throwable?.let { add(it.printStackTraceToString()) }
+        get() = buildSequence {
+            yieldNotNull(message)
+            yieldNotNull(throwable?.printStackTraceToString())
         }.joinToString("\n")
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LogLine
+
+        if (priority != other.priority) return false
+        if (tag != other.tag) return false
+        if (message != other.message) return false
+        if (throwable != other.throwable) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = priority.hashCode()
+        result = 31 * result + tag.hashCode()
+        result = 31 * result + (message?.hashCode() ?: 0)
+        result = 31 * result + (throwable?.hashCode() ?: 0)
+        return result
+    }
 
     override fun toString() = toString(true)
 

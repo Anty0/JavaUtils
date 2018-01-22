@@ -28,6 +28,12 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dependencies {
     testImplementation 'junit:junit:4.12'
 

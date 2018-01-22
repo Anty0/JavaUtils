@@ -29,7 +29,7 @@ object Logger {
 
     private const val LOG_TAG = "Logger"
 
-    private val logLinesCache = mutableListOf<LogLine>()// TODO: 5.9.16 write to and read from session files in debug activity
+    private val logLinesCache by lazy { mutableListOf<LogLine>() } // TODO: 5.9.16 write to and read from session files in debug activity
 
     val logsHandler = LogsHandler()
     var logTarget: LogTarget = DefaultTarget()

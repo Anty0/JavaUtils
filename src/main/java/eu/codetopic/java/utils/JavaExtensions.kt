@@ -23,9 +23,8 @@ import eu.codetopic.java.utils.log.Log
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.serializer
 import java.io.*
-import java.lang.Thread.sleep
 import java.lang.ref.Reference
-import java.lang.ref.WeakReference
+import kotlin.coroutines.experimental.SequenceBuilder
 
 /**
  * @author anty
@@ -233,13 +232,30 @@ object JavaExtensions {
         return this
     }
 
-    inline fun <T> T.runIfNull(block: (T) -> Unit): T {
-        if (this == null) block(this)
+    inline fun <T> T.runIfNull(block: () -> Unit): T {
+        if (this == null) block()
         return this
     }
 
     inline fun <T : R, R> T.letIf(condition: (T) -> Boolean, block: (T) -> R): R =
             if (condition(this)) block(this) else this
 
-    inline fun <T : R, R> T.letIfNull(block: () -> R): R = this ?: block()
+    inline fun <T : R, R> T?.letIfNull(block: () -> R): R = this ?: block()
+
+    //////////////////////////////////////
+    //////REGION - SequenceBuilder////////
+    //////////////////////////////////////
+
+    suspend inline fun <T> SequenceBuilder<T>.yield(block: () -> T) {
+        yield(block())
+    }
+
+    suspend fun <T> SequenceBuilder<T>.yieldNotNull(value: T?) {
+        if (value != null) yield(value)
+    }
+
+    suspend inline fun <T> SequenceBuilder<T>.yieldNotNull(block: () -> T?) {
+        val value = block()
+        if (value != null) yield(value)
+    }
 }
