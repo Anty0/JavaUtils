@@ -39,12 +39,12 @@ object JavaExtensions {
 
     fun String.substring(start: String?, end: String?): String {
         val startIndex = start?.let { indexOf(it) }
-                ?.runIf({ it == -1 }) {
+                ?.alsoIf({ it == -1 }) {
                     throw IllegalArgumentException("Failed to find start string: \"$start\"")
                 }
                 ?.let { it + start.length } ?: 0
         val endIndex = end?.let { indexOf(it, startIndex) }
-                ?.runIf({ it == -1 }) {
+                ?.alsoIf({ it == -1 }) {
                     throw IllegalArgumentException("Failed to find end string: \"$end\"")
                 } ?: length
         return substring(startIndex, endIndex)
@@ -52,10 +52,10 @@ object JavaExtensions {
 
     fun String.substringOrNull(start: String?, end: String?): String? {
         val startIndex = start?.let { indexOf(it) }
-                ?.runIf({ it == -1 }) { return null }
+                ?.alsoIf({ it == -1 }) { return null }
                 ?.let { it + start.length } ?: 0
         val endIndex = end?.let { indexOf(it, startIndex) }
-                ?.runIf({ it == -1 }) { return null }
+                ?.alsoIf({ it == -1 }) { return null }
                 ?: length
         return substring(startIndex, endIndex)
     }
@@ -223,36 +223,45 @@ object JavaExtensions {
         }
     }
 
+    @Suppress("NOTHING_TO_INLINE")
+    inline fun <K, V> Map.Entry<K, V>.asPair(): Pair<K, V> = key to value
+
     //////////////////////////////////////
     //////REGION - MISCELLANEOUS//////////
     //////////////////////////////////////
 
-    inline fun <T> T.runIf(condition: (T) -> Boolean, block: (T) -> Unit): T {
+    inline fun <R> runIf(condition: () -> Boolean, block: () -> R): R? =
+            if (condition()) block() else null
+
+    inline fun <T, R> T.runIf(condition: T.() -> Boolean, block: T.() -> R): R? =
+            if (condition()) block() else null
+
+    inline fun <T> T.alsoIf(condition: (T) -> Boolean, block: (T) -> Unit): T {
         if (condition(this)) block(this)
         return this
     }
 
-    inline fun <T> T.runIfNull(block: () -> Unit): T {
+    inline fun <T> T.alsoIfNull(block: () -> Unit): T {
         if (this == null) block()
         return this
     }
 
-    inline fun Boolean?.runIfTrue(block: () -> Unit): Boolean? {
+    inline fun Boolean?.alsoIfTrue(block: () -> Unit): Boolean? {
         if (this == true) block()
         return this
     }
 
-    inline fun Boolean.runIfTrue(block: () -> Unit): Boolean {
+    inline fun Boolean.alsoIfTrue(block: () -> Unit): Boolean {
         if (this) block()
         return this
     }
 
-    inline fun Boolean?.runIfFalse(block: () -> Unit): Boolean? {
+    inline fun Boolean?.alsoIfFalse(block: () -> Unit): Boolean? {
         if (this == false) block()
         return this
     }
 
-    inline fun Boolean.runIfFalse(block: () -> Unit): Boolean {
+    inline fun Boolean.alsoIfFalse(block: () -> Unit): Boolean {
         if (!this) block()
         return this
     }
@@ -303,4 +312,11 @@ object JavaExtensions {
         val value = block()
         if (value != null) yield(value)
     }
+
+    //////////////////////////////////////
+    //////REGION - Throwable//////////////
+    //////////////////////////////////////
+
+    @Suppress("NOTHING_TO_INLINE")
+    inline fun Throwable.throwIt(): Nothing = throw this
 }
