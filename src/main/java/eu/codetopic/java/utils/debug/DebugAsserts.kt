@@ -33,15 +33,9 @@ object DebugAsserts {
      * @see AssertionException
      */
     @Suppress("NOTHING_TO_INLINE")
-    inline fun fail(message: String?): Nothing {
+    inline fun fail(message: String? = null): Nothing {
         throw AssertionException(message)
     }
-
-    /**
-     * Fails a test with no message.
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    inline fun fail(): Nothing = fail(null)
 
     /**
      * Asserts that a block returns true. If it isn't it throws an
@@ -51,6 +45,17 @@ object DebugAsserts {
      */
     inline fun <T> T.assert(block: (T) -> Boolean): T {
         if (isEnabled && !block(this)) fail("Assertion failed")
+        return this
+    }
+
+    /**
+     * Asserts that a block returns true. If it isn't it throws an
+     * [AssertionException] with the given message.
+     *
+     * @param block condition to be checked
+     */
+    inline fun <T> T.assert(block: (T) -> Boolean, lazyMessage: (T) -> String?): T {
+        if (isEnabled && !block(this)) fail(lazyMessage(this))
         return this
     }
 
@@ -66,12 +71,23 @@ object DebugAsserts {
     }
 
     /**
+     * Asserts that a block returns false. If it isn't it throws an
+     * [AssertionException] with the given message.
+     *
+     * @param block condition to be checked
+     */
+    inline fun <T> T.assertNot(block: (T) -> Boolean, lazyMessage: (T) -> String?): T {
+        if (isEnabled && block(this)) fail(lazyMessage(this))
+        return this
+    }
+
+    /**
      * Asserts that an object isn't null. If it is an [AssertionException] is
      * thrown with the given message.
      */
     @Suppress("NOTHING_TO_INLINE")
-    inline fun <T> T.assertNotNull(): T {
-        if (isEnabled && this == null) fail("Assertion failed -> object is null")
+    inline fun <T> T.assertNotNull(lazyMessage: () -> String?): T {
+        if (isEnabled && this == null) fail(lazyMessage())
         return this
     }
 
@@ -80,8 +96,8 @@ object DebugAsserts {
      * is thrown with the given message.
      */
     @Suppress("NOTHING_TO_INLINE")
-    inline fun <T> T.assertNull(): T {
-        if (isEnabled && this != null) fail("Assertion failed -> object is not null")
+    inline fun <T> T.assertNull(lazyMessage: (T) -> String?): T {
+        if (isEnabled && this != null) fail(lazyMessage(this))
         return this
     }
 }
