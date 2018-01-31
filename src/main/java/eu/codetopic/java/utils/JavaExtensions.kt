@@ -241,6 +241,11 @@ object JavaExtensions {
         return this
     }
 
+    inline fun <T> T.alsoIfNot(condition: (T) -> Boolean, block: (T) -> Unit): T {
+        if (!condition(this)) block(this)
+        return this
+    }
+
     inline fun <T> T.alsoIfNull(block: () -> Unit): T {
         if (this == null) block()
         return this
@@ -276,25 +281,31 @@ object JavaExtensions {
         return this
     }
 
-    inline infix fun Boolean?.IfTrue(block: () -> Unit): Boolean? {
+    inline infix fun Boolean?.ifTrue(block: () -> Unit): Boolean? {
         if (this == true) block()
         return this
     }
 
-    inline infix fun Boolean.IfTrue(block: () -> Unit): Boolean {
+    inline infix fun Boolean.ifTrue(block: () -> Unit): Boolean {
         if (this) block()
         return this
     }
 
-    inline fun Boolean?.IfFalse(block: () -> Unit): Boolean? {
+    inline fun Boolean?.ifFalse(block: () -> Unit): Boolean? {
         if (this == false) block()
         return this
     }
 
-    inline fun Boolean.IfFalse(block: () -> Unit): Boolean {
+    inline fun Boolean.ifFalse(block: () -> Unit): Boolean {
         if (!this) block()
         return this
     }
+
+    @Suppress("NOTHING_TO_INLINE")
+    inline fun <T> T?.isNull(): Boolean = this == null
+
+    @Suppress("NOTHING_TO_INLINE")
+    inline fun <T> T?.isNotNull(): Boolean = this != null
 
     //////////////////////////////////////
     //////REGION - SequenceBuilder////////
