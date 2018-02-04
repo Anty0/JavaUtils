@@ -307,6 +307,8 @@ object JavaExtensions {
     @Suppress("NOTHING_TO_INLINE")
     inline fun <T> T?.isNotNull(): Boolean = this != null
 
+    inline fun <reified R> Any?.to(): R? = this as? R
+
     //////////////////////////////////////
     //////REGION - SequenceBuilder////////
     //////////////////////////////////////
