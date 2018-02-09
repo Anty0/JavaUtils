@@ -276,7 +276,7 @@ object JavaExtensions {
 
     inline fun <T : R, R> T?.letIfNull(block: () -> R): R = this ?: block()
 
-    inline infix fun <T> T.IfNull(block: () -> Unit): T {
+    inline infix fun <T> T.ifNull(block: () -> Unit): T {
         if (this == null) block()
         return this
     }
@@ -291,12 +291,12 @@ object JavaExtensions {
         return this
     }
 
-    inline fun Boolean?.ifFalse(block: () -> Unit): Boolean? {
+    inline infix fun Boolean?.ifFalse(block: () -> Unit): Boolean? {
         if (this == false) block()
         return this
     }
 
-    inline fun Boolean.ifFalse(block: () -> Unit): Boolean {
+    inline infix fun Boolean.ifFalse(block: () -> Unit): Boolean {
         if (!this) block()
         return this
     }
@@ -308,6 +308,8 @@ object JavaExtensions {
     inline fun <T> T?.isNotNull(): Boolean = this != null
 
     inline fun <reified R> Any?.to(): R? = this as? R
+
+    inline infix fun <A, B> (() -> A).pairWith(that: () -> B) = this() to that()
 
     //////////////////////////////////////
     //////REGION - SequenceBuilder////////
