@@ -22,8 +22,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
-import eu.codetopic.java.utils.JavaExtensions;
+import eu.codetopic.java.utils.*;
 import eu.codetopic.java.utils.log.Log;
+
+import static eu.codetopic.java.utils.ExtensionsKt.getOrThrow;
 
 public class Access<A> {
 
@@ -41,7 +43,7 @@ public class Access<A> {
 
     @NotNull
     protected Accessible<?, ?> getCreator() {
-        return JavaExtensions.getOrThrow(creator);
+        return getOrThrow(creator);
     }
 
     protected synchronized A getAccessed() {

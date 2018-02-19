@@ -18,8 +18,8 @@
 
 package eu.codetopic.java.utils.log.base
 
-import eu.codetopic.java.utils.JavaExtensions.printStackTraceToString
-import eu.codetopic.java.utils.JavaExtensions.yieldNotNull
+import eu.codetopic.java.utils.printStackTraceToString
+import eu.codetopic.java.utils.yieldNotNull
 import java.io.Serializable
 import kotlin.coroutines.experimental.buildSequence
 
