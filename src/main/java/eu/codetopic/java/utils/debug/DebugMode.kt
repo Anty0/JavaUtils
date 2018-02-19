@@ -36,7 +36,7 @@ object DebugMode {
         if (isEnabled) block()
     }
 
-    inline fun ifNotEnabled(block: () -> Unit) {
+    inline fun ifDisabled(block: () -> Unit) {
         if (!isEnabled) block()
     }
 }
