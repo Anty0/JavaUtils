@@ -21,7 +21,8 @@ package eu.codetopic.java.utils.log.base
 class DefaultTarget : LogTarget {
 
     override fun println(logLine: LogLine) {
-        if (Priority.ERROR == logLine.priority) System.err.println(logLine)
+        if (Priority.ERROR == logLine.priority)
+            System.err.println(logLine)
         else System.out.println(logLine)
     }
 }

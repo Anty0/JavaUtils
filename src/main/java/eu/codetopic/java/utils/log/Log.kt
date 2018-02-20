@@ -50,6 +50,18 @@ object Log {
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
      * the class or activity where the log call occurs.
+     * @param tr  An exception to log
+     */
+    @JvmStatic
+    fun v(tag: String, tr: Throwable) {
+        println(LogLine(Priority.VERBOSE, tag, null, tr))
+    }
+
+    /**
+     * Send a VERBOSE log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
@@ -68,6 +80,18 @@ object Log {
     @JvmStatic
     fun d(tag: String, msg: String) {
         println(LogLine(Priority.DEBUG, tag, msg))
+    }
+
+    /**
+     * Send a DEBUG log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
+     * @param tr  An exception to log
+     */
+    @JvmStatic
+    fun d(tag: String, tr: Throwable) {
+        println(LogLine(Priority.DEBUG, tag, null, tr))
     }
 
     /**
@@ -100,12 +124,61 @@ object Log {
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
      * the class or activity where the log call occurs.
+     * @param tr  An exception to log
+     */
+    @JvmStatic
+    fun i(tag: String,tr: Throwable) {
+        println(LogLine(Priority.INFO, tag, null, tr))
+    }
+
+    /**
+     * Send a INFO log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
      * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
     @JvmStatic
     fun i(tag: String, msg: String, tr: Throwable) {
         println(LogLine(Priority.INFO, tag, msg, tr))
+    }
+
+    /**
+     * Send a BREAK_EVENT log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
+     * @param msg The message you would like logged.
+     */
+    @JvmStatic
+    fun b(tag: String, msg: String) {
+        println(LogLine(Priority.BREAK_EVENT, tag, msg))
+    }
+
+    /**
+     * Send a BREAK_EVENT log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
+     * @param tr  An exception to log
+     */
+    @JvmStatic
+    fun b(tag: String, tr: Throwable) {
+        println(LogLine(Priority.BREAK_EVENT, tag, null, tr))
+    }
+
+    /**
+     * Send a BREAK_EVENT log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
+     * @param msg The message you would like logged.
+     * @param tr  An exception to log
+     */
+    @JvmStatic
+    fun b(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.BREAK_EVENT, tag, msg, tr))
     }
 
     /**
@@ -125,12 +198,11 @@ object Log {
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
      * the class or activity where the log call occurs.
-     * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
     @JvmStatic
-    fun w(tag: String, msg: String, tr: Throwable) {
-        println(LogLine(Priority.WARN, tag, msg, tr))
+    fun w(tag: String, tr: Throwable) {
+        println(LogLine(Priority.WARN, tag, null, tr))
     }
 
     /**
@@ -138,11 +210,12 @@ object Log {
      *
      * @param tag Used to identify the source of a log message.  It usually identifies
      * the class or activity where the log call occurs.
+     * @param msg The message you would like logged.
      * @param tr  An exception to log
      */
     @JvmStatic
-    fun w(tag: String, tr: Throwable) {
-        println(LogLine(Priority.WARN, tag, null, tr))
+    fun w(tag: String, msg: String, tr: Throwable) {
+        println(LogLine(Priority.WARN, tag, msg, tr))
     }
 
     /**
@@ -155,6 +228,18 @@ object Log {
     @JvmStatic
     fun e(tag: String, msg: String) {
         println(LogLine(Priority.ERROR, tag, msg))
+    }
+
+    /**
+     * Send a ERROR log message and log the exception.
+     *
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     * the class or activity where the log call occurs.
+     * @param tr  An exception to log
+     */
+    @JvmStatic
+    fun e(tag: String, tr: Throwable) {
+        println(LogLine(Priority.ERROR, tag, null, tr))
     }
 
     /**

@@ -21,5 +21,6 @@ package eu.codetopic.java.utils.log.base
 enum class Priority(val displayID: Char) {
 
     VERBOSE('V'), DEBUG('D'), INFO('I'),
-    WARN('W'), ERROR('E'), ASSERT('A')
+    BREAK_EVENT('B'), WARN('W'), ERROR('E'),
+    ASSERT('A')
 }

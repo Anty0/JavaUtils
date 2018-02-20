@@ -18,11 +18,7 @@
 
 package eu.codetopic.java.utils.log
 
-import java.util.ArrayList
-
-import eu.codetopic.java.utils.ArrayTools
 import eu.codetopic.java.utils.log.base.LogLine
-import eu.codetopic.java.utils.log.base.Priority
 
 class LogsHandler internal constructor() {
 
@@ -31,29 +27,21 @@ class LogsHandler internal constructor() {
         private const val LOG_TAG = "LogsHandler"
     }
 
-    private val listeners = mutableListOf<OnLoggedListener>()
+    private val listeners = mutableListOf<(LogLine) -> Unit>()
 
     @Synchronized
-    fun addOnLoggedListener(listener: OnLoggedListener) {
+    fun addOnLoggedListener(listener: (LogLine) -> Unit) {
         listeners.add(listener)
     }
 
     @Synchronized
-    fun removeOnLoggedListener(listener: OnLoggedListener) {
+    fun removeOnLoggedListener(listener: (LogLine) -> Unit) {
         listeners.remove(listener)
     }
 
     @Synchronized
     internal fun onLogged(logLine: LogLine) {
-        listeners.filter { it.filterPriorities?.contains(logLine.priority) ?: true }
-                .forEach { it.onLogged(logLine) }
-    }
-
-    interface OnLoggedListener {
-
-        val filterPriorities: Array<Priority>? get() = null
-
-        fun onLogged(logLine: LogLine)
+        listeners.forEach { it(logLine) }
     }
 
 }
