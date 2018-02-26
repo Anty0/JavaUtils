@@ -21,16 +21,24 @@ package eu.codetopic.java.utils.debug
 /**
  * @author anty
  */
-object DebugMode {
+object DebugMode { // TODO: find usages, that requires usage of listeners
 
-    @Volatile
+    private val listeners = mutableListOf<() -> Unit>()
+
+    @field:Volatile
     var isEnabled = false
+        set(value) {
+            field = value
+            listeners.forEach { it() }
+        }
 
     @Suppress("NOTHING_TO_INLINE")
-    inline fun <T> T.takeIfInDebugMode(): T? = if (isEnabled) this else null
+    inline fun <T> T.takeIfInDebugMode(): T? =
+            if (isEnabled) this else null
 
     @Suppress("NOTHING_TO_INLINE")
-    inline fun <T> T.takeUnlessInDebugMode(): T? = if (!isEnabled) this else null
+    inline fun <T> T.takeUnlessInDebugMode(): T? =
+            if (!isEnabled) this else null
 
     inline fun ifEnabled(block: () -> Unit) {
         if (isEnabled) block()
@@ -38,5 +46,13 @@ object DebugMode {
 
     inline fun ifDisabled(block: () -> Unit) {
         if (!isEnabled) block()
+    }
+
+    fun addEnabledChangedListener(listener: () -> Unit) {
+        listeners.add(listener)
+    }
+
+    fun removeEnabledChangedListener(listener: () -> Unit) {
+        listeners.remove(listener)
     }
 }

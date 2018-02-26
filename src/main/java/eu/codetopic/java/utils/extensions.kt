@@ -119,6 +119,9 @@ fun Float.ceil(): Int = Math.ceil(this.toDouble()).toInt()
 fun Double.format(digits: Int): String =
         java.lang.String.format("%.${digits}f", this)
 
+fun Float.format(digits: Int): String =
+        java.lang.String.format("%.${digits}f", this)
+
 //////////////////////////////////////
 //////REGION - WEAK_REFERENCE/////////
 //////////////////////////////////////
