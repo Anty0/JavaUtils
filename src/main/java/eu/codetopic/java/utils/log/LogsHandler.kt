@@ -19,6 +19,7 @@
 package eu.codetopic.java.utils.log
 
 import eu.codetopic.java.utils.log.base.LogLine
+import java.util.*
 
 class LogsHandler internal constructor() {
 
@@ -27,11 +28,11 @@ class LogsHandler internal constructor() {
         private const val LOG_TAG = "LogsHandler"
     }
 
-    private val listeners = mutableListOf<(LogLine) -> Unit>()
+    private val listeners = WeakHashMap<(LogLine) -> Unit, Unit>()
 
     @Synchronized
     fun addOnLoggedListener(listener: (LogLine) -> Unit) {
-        listeners.add(listener)
+        listeners[listener] = Unit
     }
 
     @Synchronized
@@ -41,7 +42,7 @@ class LogsHandler internal constructor() {
 
     @Synchronized
     internal fun onLogged(logLine: LogLine) {
-        listeners.forEach { it(logLine) }
+        listeners.keys.forEach { it(logLine) }
     }
 
 }

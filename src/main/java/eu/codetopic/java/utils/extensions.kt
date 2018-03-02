@@ -156,6 +156,9 @@ fun <T : Serializable> String.deserialize(): T? {
 //////////////////////////////////////
 
 inline fun <reified T : Any> kSerializer(): KSerializer<T> = T::class.serializer()
+// FIXME: instead of relaying on this function and using reflection
+//  use directly SerializableClassName.serializer(), but first
+//  find a way to add support for it into the Android Studio
 
 //////////////////////////////////////
 //////REGION - EXPRESSIONS////////////

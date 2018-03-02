@@ -18,18 +18,20 @@
 
 package eu.codetopic.java.utils.debug
 
+import java.util.*
+
 /**
  * @author anty
  */
-object DebugMode { // TODO: find usages, that requires usage of listeners
+object DebugMode {
 
-    private val listeners = mutableListOf<() -> Unit>()
+    private val listeners = WeakHashMap<() -> Unit, Unit>()
 
     @field:Volatile
     var isEnabled = false
         set(value) {
             field = value
-            listeners.forEach { it() }
+            listeners.keys.forEach { it() }
         }
 
     @Suppress("NOTHING_TO_INLINE")
@@ -48,11 +50,11 @@ object DebugMode { // TODO: find usages, that requires usage of listeners
         if (!isEnabled) block()
     }
 
-    fun addEnabledChangedListener(listener: () -> Unit) {
-        listeners.add(listener)
+    fun addChangeListener(listener: () -> Unit) {
+        listeners[listener] = Unit
     }
 
-    fun removeEnabledChangedListener(listener: () -> Unit) {
+    fun removeChangeListener(listener: () -> Unit) {
         listeners.remove(listener)
     }
 }
