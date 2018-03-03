@@ -43,11 +43,10 @@ class SimpleSuspendLock {
     }
 
     fun lock() {
-        var success = false
         do {
-            success = tryLock()
-            if (!success) Thread.yield()
-        } while (!success)
+            if (tryLock()) break
+            Thread.yield()
+        } while (true)
     }
 
     suspend fun suspendLock() {
