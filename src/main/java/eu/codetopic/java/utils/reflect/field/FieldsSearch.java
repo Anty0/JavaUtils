@@ -95,6 +95,7 @@ public class FieldsSearch {
                 Type[] typeBounds = ((TypeVariable) type).getBounds();
                 Class<?> declaringClass = field.getDeclaringClass();
                 List<Class> hierarchy = new ArrayList<>();
+                //noinspection deprecation
                 while (!Objects.equals(declaringClass, baseClass)) {
                     hierarchy.add(baseClass);
                     baseClass = baseClass.getSuperclass();

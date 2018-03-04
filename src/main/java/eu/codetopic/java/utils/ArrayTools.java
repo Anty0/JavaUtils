@@ -31,6 +31,7 @@ public final class ArrayTools {
     @Deprecated
     public static <T> boolean contains(T[] array, T content) {
         for (T t : array) {
+            //noinspection deprecation
             if (Objects.equals(t, content)) {
                 return true;
             }
@@ -44,6 +45,7 @@ public final class ArrayTools {
     @Deprecated
     public static boolean contains(int[] array, int content) {
         for (int t : array) {
+            //noinspection deprecation
             if (Objects.equals(t, content)) {
                 return true;
             }
@@ -65,6 +67,7 @@ public final class ArrayTools {
     /**
      * Use kotlin extension function plus instead
      */
+    @SuppressWarnings("deprecation")
     @Deprecated
     public static <T> T[] add(T[] array, T content) {
         return add(array, array.length, content);
@@ -83,6 +86,7 @@ public final class ArrayTools {
     /**
      * Rework to kotlin extension function (as Array.without(Int)) and use it instead
      */
+    @SuppressWarnings("deprecation")
     @Deprecated
     public static <T> T[] remove(T[] array, int index) {
         if (index == 0) {

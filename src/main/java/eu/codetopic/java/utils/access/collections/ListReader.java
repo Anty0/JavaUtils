@@ -57,6 +57,7 @@ public class ListReader<E, T extends ListAccess<E>> extends Acceding<List<E>, T>
     @NotNull
     @Override
     public Iterator<E> iterator() {
+        //noinspection deprecation
         return new IteratorWrapper<E>(content.iterator()) {
             @Override
             public Iterator<E> getBase() {
@@ -111,6 +112,7 @@ public class ListReader<E, T extends ListAccess<E>> extends Acceding<List<E>, T>
     }
 
     private ListIterator<E> wrapListIterator(ListIterator<E> listIterator) {
+        //noinspection deprecation
         return new ListIteratorWrapper<E>(listIterator) {
             @Override
             public ListIterator<E> getBase() {

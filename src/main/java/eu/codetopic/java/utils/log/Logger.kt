@@ -19,8 +19,6 @@
 package eu.codetopic.java.utils.log
 
 import eu.codetopic.java.utils.debug.DebugMode
-import java.util.ArrayList
-
 import eu.codetopic.java.utils.log.base.DefaultTarget
 import eu.codetopic.java.utils.log.base.LogLine
 import eu.codetopic.java.utils.log.base.LogTarget

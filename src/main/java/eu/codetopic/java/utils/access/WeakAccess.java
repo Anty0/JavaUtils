@@ -22,8 +22,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 
-import eu.codetopic.java.utils.*;
-
 import static eu.codetopic.java.utils.ExtensionsKt.getOrThrow;
 
 public class WeakAccess<A> extends Access<WeakReference<A>> {

@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import eu.codetopic.java.utils.*;
 import eu.codetopic.java.utils.simple.IteratorWrapper;
 
 import static eu.codetopic.java.utils.ExtensionsKt.addBeforeEveryLine;
@@ -160,6 +159,7 @@ public class FoundField implements Iterable<FoundField> {
     }
 
     @Override
+    @NotNull
     public Iterator<FoundField> iterator() {
         return new HideSupportFoundsFieldsIterator(Arrays
                 .asList(getContentFields()).iterator());
@@ -196,6 +196,7 @@ public class FoundField implements Iterable<FoundField> {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static class FoundFieldsIterator extends IteratorWrapper<FoundField> {
 
         private Iterator<FoundField> parent = null;

@@ -26,6 +26,7 @@ import java.util.Comparator;
  *
  * USE KOTLIN'S EXTENSIONS INSTEAD
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 @Deprecated
 public final class Objects {
     private Objects() {

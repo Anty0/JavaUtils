@@ -24,6 +24,7 @@ import java.util.ListIterator;
  * Use kotlin's interface delegate instead
  * @param <E>
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 @Deprecated
 public class ListIteratorWrapper<E> implements ListIterator<E> {
 

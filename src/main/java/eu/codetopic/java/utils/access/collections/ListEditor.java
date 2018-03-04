@@ -54,21 +54,11 @@ public class ListEditor<E, T extends ListAccess<E>> extends ListReader<E, T> {
     }
 
     public ListEditor<E, T> add(final E object) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.add(object);
-            }
-        });
+        return post(toModify -> toModify.add(object));
     }
 
     public ListEditor<E, T> add(final int index, final E object) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.add(index, object);
-            }
-        });
+        return post(toModify -> toModify.add(index, object));
     }
 
     public <AT extends E> ListEditor<E, T> addAll(final AT[] array) {
@@ -76,77 +66,41 @@ public class ListEditor<E, T extends ListAccess<E>> extends ListReader<E, T> {
     }
 
     public ListEditor<E, T> addAll(final Collection<? extends E> collection) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.addAll(collection);
-            }
-        });
+        return post(toModify -> toModify.addAll(collection));
     }
 
     public ListEditor<E, T> addAll(final int index, final Collection<? extends E> collection) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.addAll(index, collection);
-            }
-        });
+        return post(toModify -> toModify.addAll(index, collection));
     }
 
     public ListEditor<E, T> clear() {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.clear();
-            }
-        });
+        return post(List::clear);
     }
 
     public ListEditor<E, T> remove(final int index) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.remove(index);
-            }
-        });
+        return post(toModify -> toModify.remove(index));
     }
 
     public ListEditor<E, T> remove(final Object object) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                //noinspection SuspiciousMethodCalls
-                toModify.remove(object);
-            }
+        return post(toModify -> {
+            //noinspection SuspiciousMethodCalls
+            toModify.remove(object);
         });
     }
 
     public ListEditor<E, T> set(final int index, final E object) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.set(index, object);
-            }
-        });
+        return post(toModify -> toModify.set(index, object));
     }
 
     public ListEditor<E, T> removeAll(final Collection<?> collection) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                //noinspection SuspiciousMethodCalls
-                toModify.removeAll(collection);
-            }
+        return post(toModify -> {
+            //noinspection SuspiciousMethodCalls
+            toModify.removeAll(collection);
         });
     }
 
     public ListEditor<E, T> retainAll(final Collection<?> collection) {
-        return post(new ListModification<E>() {
-            @Override
-            public void modify(List<E> toModify) {
-                toModify.retainAll(collection);
-            }
-        });
+        return post(toModify -> toModify.retainAll(collection));
     }
 
     public synchronized boolean apply() {
