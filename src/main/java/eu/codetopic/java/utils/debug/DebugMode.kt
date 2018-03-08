@@ -30,8 +30,10 @@ object DebugMode {
     @field:Volatile
     var isEnabled = false
         set(value) {
-            field = value
-            listeners.keys.forEach { it() }
+            if (field != value) {
+                field = value
+                listeners.keys.forEach { it() }
+            }
         }
 
     @Suppress("NOTHING_TO_INLINE")
