@@ -27,7 +27,7 @@ dependencies {
 Then add the repository as a submodule:
 
 ```bash
-git submodule add javautils git@github.com:Anty0/JavaUtils.git
+git submodule add git@github.com:Anty0/JavaUtils.git javautils
 ```
 
 ## Features
