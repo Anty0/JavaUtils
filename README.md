@@ -13,11 +13,14 @@ Repository is organized as a single library you can include in a project. It use
 > [!NOTE]
 > Project is currently not published to any Maven repository. Tell me if you want me to publish it (or maybe split part of it into a separate library and publish that).
 
+> [!NOTE]
+> If you plan to also use the AndroidUtils library, follow the instructions in that repository as that will include both libraries in your project.
+
 To include this library in your project, add the following to your `build.gradle`:
 
 ```gradle
 dependencies {
-    implementation project(path: ':utils:javautils')
+    implementation project(path: ':javautils')
 }
 ```
 
